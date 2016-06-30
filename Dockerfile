@@ -1,18 +1,12 @@
-FROM       ubuntu:latest
-MAINTAINER seungkim11@gmail.com
+FROM java:openjdk-8-jdk
 
-# Installation:
-# Import MongoDB public GPG key AND create a MongoDB list file
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
-# Update apt-get sources AND install MongoDB
-RUN apt-get update && apt-get install -y mongodb-org
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# Create the MongoDB data directory
-RUN mkdir -p /data/db
+WORKDIR /usr/local/src/game-engine
 
-# Expose port #27017 from the container to the host
-EXPOSE 27017
+ADD build.gradle /usr/local/src/game-engine
+ADD gradle /usr/local/src/game-engine/gradle
+ADD gradlew /usr/local/src/game-engine
+ADD src /usr/local/src/game-engine/src
 
-# Set /usr/bin/mongod as the dockerized entry-point application
-ENTRYPOINT ["/usr/bin/mongod"]
+ENTRYPOINT ["./gradlew", "jettyRunWar"]
