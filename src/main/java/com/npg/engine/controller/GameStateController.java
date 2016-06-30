@@ -7,7 +7,6 @@ import com.npg.engine.model.GameState;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
@@ -70,20 +69,20 @@ public class GameStateController {
     return state;
   }
 
-  @GET
-  @Path("/action/{move}")
-  @Produces("application/json")
-  public GameState action(@PathParam("move") String move){
-
-    String mapStr = state.getMapStr();
-    String[] rows = mapStr.split(";");
-    //|x| | | | |;| | | | | |;| | | | |o|
-
-    for (String row: rows){
-      String[] r = row.split("|");
-    }
-    return null;
-  }
+//  @GET
+//  @Path("/action/{move}")
+//  @Produces("application/json")
+//  public GameState action(@PathParam("move") String move){
+//
+//    String mapStr = state.getMapStr();
+//    String[] rows = mapStr.split(";");
+//    //|x| | | | |;| | | | | |;| | | | |o|
+//
+//    for (String row: rows){
+//      String[] r = row.split("|");
+//    }
+//    return null;
+//  }
 
 
 
