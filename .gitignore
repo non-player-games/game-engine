@@ -2,6 +2,11 @@
 .idea/
 build/
 
+# idea related files
+npg-game-engine.iml
+npg-game-engine.ipr
+npg-game-engine.iws
+
 *.class
 
 # Mobile Tools for Java (J2ME)
