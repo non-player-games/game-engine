@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
  * Created by samskim on 7/20/16.
  */
 @Entity
-public class GameState {
+public class GameState extends State {
 
   @Id
   @GeneratedValue

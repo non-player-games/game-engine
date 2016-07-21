@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
  * Created by samskim on 7/20/16.
  */
 @Entity
-public class PlayerState {
+public class PlayerState extends State {
 
   @Id
   @GeneratedValue

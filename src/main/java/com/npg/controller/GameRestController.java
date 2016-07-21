@@ -1,12 +1,15 @@
 package com.npg.controller;
 
 import com.npg.model.gameobj.GameState;
+import com.npg.model.gameobj.State;
 import com.npg.model.payload.GetStatePayloadReq;
 import com.npg.model.payload.MoveRequest;
 import com.npg.model.payload.OnCreatePayloadReq;
 import com.npg.model.payload.OnCreatePayloadRes;
+import com.npg.model.payload.Payload;
 import com.npg.model.payload.ProcessMovePayloadReq;
 import com.npg.service.GameService;
+import com.npg.service.PlayerStateService;
 import com.npg.service.UserService;
 
 import org.slf4j.Logger;
@@ -28,11 +31,13 @@ public class GameRestController {
 
   private GameService gameService;
   private UserService userService;
+  private PlayerStateService playerStateService;
 
   @Autowired
-  public GameRestController(GameService g, UserService u){
+  public GameRestController(GameService g, UserService u, PlayerStateService p){
     gameService = g;
     userService = u;
+    playerStateService = p;
   }
 
   @RequestMapping("/hello")
@@ -41,7 +46,7 @@ public class GameRestController {
   }
 
   @RequestMapping("/action/onCreate")
-  public OnCreatePayloadRes onCreate(@RequestBody OnCreatePayloadReq payload){
+  public Payload onCreate(@RequestBody OnCreatePayloadReq payload){
     long id = gameService.createGame(payload);
     return new OnCreatePayloadRes(id);
   }
@@ -49,13 +54,13 @@ public class GameRestController {
   // just return global GameState for now
   // TODO: Return GameState that is only visible to the user
   @RequestMapping("/action/getState")
-  public GameState getState(@RequestBody GetStatePayloadReq payload){
+  public State getGameState(@RequestBody GetStatePayloadReq payload){
     logger.info("Server getState executed with payload gid: " + payload.getGid());
 
     if (payload.getUid() == 0){
       return gameService.findByGid(payload.getGid());
     }else{
-      return gameService.findByGidAndUid(payload.getGid(), payload.getUid());
+      return playerStateService.findByGidAndUid(payload.getGid(), payload.getUid());
     }
   }
 

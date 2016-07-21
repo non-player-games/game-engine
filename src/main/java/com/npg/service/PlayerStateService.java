@@ -1,6 +1,7 @@
 package com.npg.service;
 
 import com.npg.model.gameobj.PlayerState;
+import com.npg.model.gameobj.State;
 import com.npg.repository.GameStateRepository;
 import com.npg.repository.PlayerStateRepository;
 import com.npg.repository.UserRepository;
@@ -30,5 +31,9 @@ public class PlayerStateService {
 
   public void save(List<PlayerState> playerStates) {
     playerStateRepository.save(playerStates);
+  }
+
+  public PlayerState findByGidAndUid(long gid, long uid) {
+    return playerStateRepository.findPlayerStateByGameStateIdAndUserId(gid, uid);
   }
 }
