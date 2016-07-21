@@ -21,6 +21,9 @@ public class GameState {
   @OneToMany (mappedBy = "gameState")
   List<PlayerState> playerStates;
 
+  public GameState() {
+  }
+
   public GameState(List<PlayerState> playerStates) {
     this.playerStates = playerStates;
   }

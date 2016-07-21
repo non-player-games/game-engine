@@ -11,6 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GameStateRepository extends CrudRepository<GameState, Long>{
 
-
-
+  GameState findGameStateByIdAndPlayerStatesUserId(long gid, long uid);
 }

@@ -1,6 +1,8 @@
 package com.npg.model.gameobj;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class PlayerState {
   @Embedded
   private Position position;
 
+  @JsonIgnore
   @ManyToOne
   private GameState gameState;
 
