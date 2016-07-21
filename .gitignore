@@ -1,6 +1,8 @@
 .gradle/
 .idea/
 build/
+.mvn/
+target/
 
 # idea related files
 npg-game-engine.iml
